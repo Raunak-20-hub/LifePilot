@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            BRAIN DUMP
+        </span>
+
+        <h1>
+            Quick Notes
+        </h1>
+
+        <p>
+            Get thoughts out of your head
+            so you can focus.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="two-col">
+
+
+<section class="panel">
+
+    <h2>
+        Capture a thought
+    </h2>
+
+
+    <form
+        class="form"
+        method="post"
+    >
+
+        <label>
+
+            Title
+
+            <input
+                name="title"
+                required
+                placeholder="Project idea"
+            >
+
+        </label>
+
+
+        <label>
+
+            Note
+
+            <textarea
+                name="content"
+                rows="8"
+                placeholder="Write anything you don't want to forget..."
+            ></textarea>
+
+        </label>
+
+
+        <button class="primary-btn full">
+
+            Save note
+
+        </button>
+
+    </form>
+
+</section>
+
+
+
+<section class="notes-grid">
+
+{% for note in notes %}
+
+<article class="note">
+
+    <div>
+
+        <span>
+            ✎
+        </span>
+
+
+        <form
+            method="post"
+            action="{{ url_for(
+                'delete_note',
+                note_id=note.id
+            ) }}"
+        >
+
+            <button class="ghost danger">
+                ×
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <h3>
+        {{ note.title }}
+    </h3>
+
+
+    <p>
+        {{ note.content }}
+    </p>
+
+
+    <small>
+        {{ note.created_at }}
+    </small>
+
+</article>
+
+{% else %}
+
+<div class="panel empty">
+
+    No notes yet.
+
+    Capture that idea before
+    it disappears.
+
+</div>
+
+{% endfor %}
+
+</section>
+
+</div>
+
+{% endblock %}

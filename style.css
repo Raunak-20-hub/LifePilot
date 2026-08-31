@@ -1,0 +1,1823 @@
+:root {
+
+    --background: #f5f7fb;
+
+    --panel: #ffffff;
+
+    --text: #172033;
+
+    --muted: #748096;
+
+    --border: #e7eaf0;
+
+    --accent: #6c5ce7;
+
+    --accent-light: #8b7cf2;
+
+    --soft: #efedff;
+
+    --green: #1fa774;
+
+    --red: #e85d75;
+
+    --shadow:
+        0 12px 35px rgba(25, 35, 60, 0.07);
+
+    --radius: 22px;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    font-family: "DM Sans", sans-serif;
+}
+
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+
+.app-shell {
+
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+.sidebar {
+
+    width: 255px;
+
+    background: #111526;
+
+    color: white;
+
+    padding: 25px 16px;
+
+    position: fixed;
+
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 10;
+}
+
+
+.main {
+
+    margin-left: 255px;
+
+    width: calc(100% - 255px);
+
+    padding:
+        0 4.5% 60px;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding:
+        4px 12px 28px;
+}
+
+
+.brand-mark {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b7cf2,
+            #5545cf
+        );
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 19px;
+}
+
+
+.brand b {
+
+    font:
+        700 22px
+        "Space Grotesk";
+}
+
+
+.brand small {
+
+    display: block;
+
+    color: #858ca6;
+
+    font-size: 10px;
+
+    margin-top: 2px;
+}
+
+
+.side-label {
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: #646c86;
+
+    padding:
+        0 12px 10px;
+}
+
+
+.sidebar nav {
+
+    display: grid;
+
+    gap: 5px;
+}
+
+
+.sidebar nav a {
+
+    color: #9299af;
+
+    text-decoration: none;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    gap: 13px;
+
+    align-items: center;
+
+    font-size: 14px;
+
+    transition: .2s;
+}
+
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+
+    background: #20253a;
+
+    color: white;
+}
+
+
+.sidebar nav a.active {
+
+    box-shadow:
+        inset 3px 0
+        var(--accent-light);
+}
+
+
+/* =========================================
+   SIDE TIP
+========================================= */
+
+
+.side-tip {
+
+    margin-top: auto;
+
+    background: #1b2032;
+
+    border: 1px solid #292e42;
+
+    border-radius: 16px;
+
+    padding: 15px;
+}
+
+
+.side-tip strong {
+
+    font-size: 12px;
+}
+
+
+.side-tip p {
+
+    font-size: 11px;
+
+    line-height: 1.55;
+
+    color: #969db3;
+}
+
+
+.reset {
+
+    border: 0;
+
+    background: transparent;
+
+    color: #656d85;
+
+    font-size: 11px;
+
+    margin-top: 13px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+
+.topbar {
+
+    height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.eyebrow {
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color: var(--muted);
+}
+
+
+.top-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.icon-btn,
+.avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel);
+
+    display: grid;
+
+    place-items: center;
+
+    cursor: pointer;
+}
+
+
+.avatar {
+
+    background: var(--text);
+
+    color: white;
+
+    border: 0;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.mobile-brand {
+
+    display: none;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+
+.hero {
+
+    background:
+        linear-gradient(
+            115deg,
+            #1b1f33,
+            #292451
+        );
+
+    border-radius: 28px;
+
+    padding: 34px 38px;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: var(--shadow);
+}
+
+
+.hero h1 {
+
+    font:
+        700 clamp(27px, 3vw, 42px)
+        "Space Grotesk";
+
+    margin:
+        11px 0 6px;
+}
+
+
+.hero h1 span {
+
+    color: #a89fff;
+}
+
+
+.hero p {
+
+    color: #aeb4c7;
+
+    margin: 0;
+}
+
+
+.pill {
+
+    font-size: 9px;
+
+    letter-spacing: 1.6px;
+
+    color: var(--accent);
+
+    font-weight: 800;
+}
+
+
+.hero .pill {
+
+    color: #aaa2ff;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+
+.primary-btn {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent-light),
+            var(--accent)
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    padding: 12px 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    box-shadow:
+        0 8px 18px
+        rgba(102, 88, 221, .2);
+}
+
+
+.full {
+
+    width: 100%;
+
+    text-align: center;
+}
+
+
+.ghost {
+
+    border: 1px solid var(--border);
+
+    background: transparent;
+
+    color: var(--muted);
+
+    border-radius: 9px;
+
+    padding: 7px 10px;
+
+    cursor: pointer;
+}
+
+
+.danger:hover {
+
+    color: var(--red);
+
+    border-color: #ffd0d8;
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+
+.stat-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin: 18px 0;
+}
+
+
+.stat-card {
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    box-shadow: var(--shadow);
+}
+
+
+.stat-icon {
+
+    width: 31px;
+
+    height: 31px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--soft);
+
+    color: var(--accent);
+
+    border-radius: 9px;
+
+    margin-bottom: 14px;
+
+    font-weight: 800;
+}
+
+
+.stat-card span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    font:
+        700 27px
+        "Space Grotesk";
+
+    margin: 7px 0;
+}
+
+
+.stat-card small {
+
+    font-size: 10px;
+
+    color: var(--muted);
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.3fr .7fr;
+
+    gap: 16px;
+}
+
+
+.panel {
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 23px;
+
+    box-shadow: var(--shadow);
+}
+
+
+.panel-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: start;
+
+    margin-bottom: 17px;
+}
+
+
+.panel h2 {
+
+    font:
+        700 17px
+        "Space Grotesk";
+
+    margin: 0;
+}
+
+
+.panel-head p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin: 5px 0 0;
+}
+
+
+.panel-head a {
+
+    font-size: 11px;
+
+    color: var(--accent);
+
+    text-decoration: none;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   TASKS
+========================================= */
+
+
+.task-list {
+
+    display: grid;
+
+    gap: 3px;
+}
+
+
+.task-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 4px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.check {
+
+    width: 22px;
+
+    height: 22px;
+
+    border:
+        1.5px solid #cbd0dc;
+
+    background: transparent;
+
+    border-radius: 7px;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+
+.task-row.done .check {
+
+    background: var(--green);
+
+    border-color: var(--green);
+}
+
+
+.task-info {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.task-info strong {
+
+    display: block;
+
+    font-size: 12px;
+}
+
+
+.task-info span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+
+.task-row.done
+.task-info strong {
+
+    text-decoration: line-through;
+
+    color: #9aa2b2;
+}
+
+
+.priority {
+
+    font-size: 9px;
+
+    padding: 5px 8px;
+
+    border-radius: 7px;
+}
+
+
+.priority.high {
+
+    background: #fff0f2;
+
+    color: var(--red);
+}
+
+
+.priority.medium {
+
+    background: #fff8e7;
+
+    color: #b88418;
+}
+
+
+.priority.low {
+
+    background: #eaf8f3;
+
+    color: var(--green);
+}
+
+
+/* =========================================
+   LIFE SCORE
+========================================= */
+
+
+.score-ring {
+
+    width: 130px;
+
+    height: 130px;
+
+    border-radius: 50%;
+
+    margin: 10px auto 16px;
+
+    background:
+        conic-gradient(
+            var(--accent)
+            var(--score),
+            #edf0f5 0
+        );
+
+    display: grid;
+
+    place-items: center;
+}
+
+
+.score-ring > div {
+
+    width: 102px;
+
+    height: 102px;
+
+    background: var(--panel);
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    align-content: center;
+}
+
+
+.score-ring b {
+
+    font:
+        700 30px
+        "Space Grotesk";
+}
+
+
+.score-ring small {
+
+    font-size: 9px;
+
+    color: var(--muted);
+}
+
+
+.mini-bars > div {
+
+    margin: 9px 0;
+}
+
+
+.mini-bars span {
+
+    font-size: 10px;
+}
+
+
+.mini-bars i,
+.money-bar i,
+.goal-mini i,
+.progress {
+
+    display: block;
+
+    height: 6px;
+
+    border-radius: 10px;
+
+    background: #eef0f5;
+
+    overflow: hidden;
+}
+
+
+.mini-bars em,
+.money-bar em,
+.goal-mini em,
+.progress em {
+
+    display: block;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--accent),
+            var(--accent-light)
+        );
+
+    border-radius: inherit;
+}
+
+
+/* =========================================
+   GOALS
+========================================= */
+
+
+.goal-mini {
+
+    margin: 14px 0;
+}
+
+
+.goal-mini div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 11px;
+}
+
+
+.goal-mini span {
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   HABITS
+========================================= */
+
+
+.habit-strip {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.habit-mini {
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 13px;
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+
+.habit-mini > span {
+
+    font-size: 22px;
+}
+
+
+.habit-mini strong {
+
+    display: block;
+
+    font-size: 11px;
+}
+
+
+.habit-mini small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   QUOTE
+========================================= */
+
+
+.quote {
+
+    grid-column: span 2;
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f2f0ff,
+            #ffffff
+        );
+}
+
+
+.quote-mark {
+
+    font:
+        700 55px Georgia;
+
+    color: var(--accent);
+}
+
+
+.quote h2 {
+
+    font-size: 19px;
+}
+
+
+.quote p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   PAGE TITLES
+========================================= */
+
+
+.page-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin: 22px 0;
+}
+
+
+.page-title h1 {
+
+    font:
+        700 38px
+        "Space Grotesk";
+
+    margin: 7px 0 3px;
+}
+
+
+.page-title p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   FORMS
+========================================= */
+
+
+.two-col {
+
+    display: grid;
+
+    grid-template-columns:
+        .75fr 1.25fr;
+
+    gap: 17px;
+}
+
+
+.form {
+
+    display: grid;
+
+    gap: 14px;
+
+    margin-top: 20px;
+}
+
+
+.form label {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #596277;
+}
+
+
+.form input,
+.form select,
+.form textarea {
+
+    display: block;
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+
+    padding: 11px 12px;
+
+    outline: 0;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    resize: vertical;
+}
+
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+
+    border-color: var(--accent);
+}
+
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   GOAL CARDS
+========================================= */
+
+
+.goal-card {
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 16px;
+
+    margin-bottom: 11px;
+}
+
+
+.goal-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.goal-head strong {
+
+    font-size: 12px;
+}
+
+
+.goal-head p {
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    margin:
+        4px 0 13px;
+}
+
+
+.goal-foot {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 6px;
+}
+
+
+.inline-progress {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    margin-top: 13px;
+}
+
+
+.inline-progress input {
+
+    flex: 1;
+}
+
+
+.inline-progress output {
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   MONEY
+========================================= */
+
+
+.big-number {
+
+    font:
+        700 29px
+        "Space Grotesk";
+}
+
+
+.big-number small {
+
+    font-size: 10px;
+
+    color: var(--muted);
+}
+
+
+.money-bar {
+
+    margin: 16px 0;
+}
+
+
+.money-bar > div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+
+.money-bar span {
+
+    color: var(--muted);
+}
+
+
+.expense-table > div {
+
+    display: grid;
+
+    grid-template-columns:
+        35px 1fr 1fr auto 35px;
+
+    gap: 10px;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid var(--border);
+
+    padding: 12px 0;
+}
+
+
+.expense-dot {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 9px;
+
+    background: var(--soft);
+
+    display: grid;
+
+    place-items: center;
+
+    color: var(--accent);
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.expense-table strong {
+
+    font-size: 11px;
+}
+
+
+.expense-table small {
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+.expense-table b {
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   HABIT PAGE
+========================================= */
+
+
+.habit-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.habit-emoji {
+
+    width: 39px;
+
+    height: 39px;
+
+    border-radius: 12px;
+
+    background: var(--soft);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 19px;
+}
+
+
+.habit-check {
+
+    border:
+        1px solid #d8dbe4;
+
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 8px 12px;
+
+    font-size: 10px;
+
+    color: var(--accent);
+
+    cursor: pointer;
+}
+
+
+.habit-check.checked {
+
+    background: #eaf8f3;
+
+    color: var(--green);
+
+    border-color: #bfe9d7;
+}
+
+
+.soft-note {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    background: #f8f7ff;
+
+    border-radius: 12px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   SKILLS
+========================================= */
+
+
+.roadmap-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 17px;
+}
+
+
+.roadmap-title {
+
+    display: flex;
+
+    gap: 13px;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+.roadmap-title > span {
+
+    font-size: 29px;
+}
+
+
+.steps {
+
+    display: grid;
+
+    gap: 0;
+
+    margin-bottom: 18px;
+}
+
+
+.step {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    position: relative;
+
+    min-height: 34px;
+}
+
+
+.step b {
+
+    width: 22px;
+
+    height: 22px;
+
+    background: var(--soft);
+
+    color: var(--accent);
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 9px;
+}
+
+
+.step span {
+
+    font-size: 11px;
+}
+
+
+.step i {
+
+    position: absolute;
+
+    left: 7px;
+
+    top: 26px;
+
+    color: #d1d4de;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   NOTES
+========================================= */
+
+
+.notes-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+}
+
+
+.note {
+
+    background: #fffbe7;
+
+    border:
+        1px solid #f1e9bd;
+
+    border-radius: 16px;
+
+    padding: 17px;
+
+    min-height: 150px;
+}
+
+
+.note > div {
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+
+.note h3 {
+
+    font:
+        700 14px
+        "Space Grotesk";
+
+    margin:
+        12px 0 7px;
+}
+
+
+.note p {
+
+    font-size: 11px;
+
+    line-height: 1.55;
+
+    color: #77705a;
+
+    white-space: pre-wrap;
+}
+
+
+.note small {
+
+    color: #a49c7e;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+
+.empty {
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+
+body.dark {
+
+    --background: #0d1020;
+
+    --panel: #15192b;
+
+    --text: #eef0fa;
+
+    --muted: #9199b0;
+
+    --border: #292e42;
+
+    --soft: #25203f;
+
+    --shadow:
+        0 12px 35px rgba(0,0,0,.22);
+}
+
+
+body.dark
+.form input,
+body.dark
+.form select,
+body.dark
+.form textarea {
+
+    background: #0f1322;
+
+    color: var(--text);
+}
+
+
+body.dark .icon-btn {
+
+    background: var(--panel);
+
+    color: #ccd1e1;
+}
+
+
+body.dark .quote {
+
+    background:
+        linear-gradient(
+            135deg,
+            #211f39,
+            #15192b
+        );
+}
+
+
+body.dark .soft-note {
+
+    background: #1d1a31;
+}
+
+
+body.dark .note {
+
+    background: #272433;
+
+    border-color: #494159;
+}
+
+
+body.dark .note p {
+
+    color: #c1bacd;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 70px;
+
+        padding: 18px 9px;
+    }
+
+
+    .brand div:not(.brand-mark),
+    .side-label,
+    .sidebar nav a span,
+    .side-tip,
+    .reset {
+
+        display: none;
+    }
+
+
+    .sidebar nav a {
+
+        justify-content: center;
+    }
+
+
+    .main {
+
+        margin-left: 70px;
+
+        width:
+            calc(100% - 70px);
+
+        padding:
+            0 20px 40px;
+    }
+
+
+    .mobile-brand {
+
+        display: block;
+
+        font:
+            700 18px
+            "Space Grotesk";
+    }
+
+
+    .eyebrow {
+
+        display: none;
+    }
+
+
+    .stat-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .dashboard-grid,
+    .two-col,
+    .roadmap-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .quote {
+
+        grid-column: auto;
+    }
+
+
+    .habit-strip {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .main {
+
+        padding:
+            0 12px 30px;
+    }
+
+
+    .stat-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .hero {
+
+        padding: 25px;
+
+        display: block;
+    }
+
+
+    .hero .primary-btn {
+
+        margin-top: 20px;
+    }
+
+
+    .page-title h1 {
+
+        font-size: 30px;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .notes-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .expense-table > div {
+
+        grid-template-columns:
+            30px 1fr auto 30px;
+    }
+
+
+    .expense-table small {
+
+        display: none;
+    }
+
+}

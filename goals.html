@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            DIRECTION
+        </span>
+
+        <h1>
+            Goals
+        </h1>
+
+        <p>
+            Make big ambitions small enough to start.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="two-col">
+
+
+<section class="panel">
+
+    <h2>
+        Create a goal
+    </h2>
+
+
+    <form
+        class="form"
+        method="post"
+    >
+
+        <label>
+
+            Goal
+
+            <input
+                name="title"
+                required
+                placeholder="Build my portfolio"
+            >
+
+        </label>
+
+
+        <label>
+
+            Why does it matter?
+
+            <textarea
+                name="description"
+                placeholder="Describe what success looks like..."
+            ></textarea>
+
+        </label>
+
+
+        <div class="form-grid">
+
+            <label>
+
+                Current progress %
+
+                <input
+                    type="number"
+                    name="progress"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </label>
+
+
+            <label>
+
+                Target date
+
+                <input
+                    type="date"
+                    name="deadline"
+                >
+
+            </label>
+
+        </div>
+
+
+        <button class="primary-btn full">
+
+            Create goal
+
+        </button>
+
+    </form>
+
+</section>
+
+
+
+<section class="panel">
+
+    <div class="panel-head">
+
+        <div>
+
+            <h2>
+                Your direction
+            </h2>
+
+            <p>
+                {{ goals|length }} active goals
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% for goal in goals %}
+
+    <div class="goal-card">
+
+        <div class="goal-head">
+
+            <div>
+
+                <strong>
+                    ◎ {{ goal.title }}
+                </strong>
+
+                <p>
+                    {{ goal.description or
+                    'Keep moving one step at a time.' }}
+                </p>
+
+            </div>
+
+
+            <form
+                method="post"
+                action="{{ url_for(
+                    'delete_goal',
+                    goal_id=goal.id
+                ) }}"
+            >
+
+                <button class="ghost danger">
+                    ×
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="progress">
+
+            <em
+                style="width:{{ goal.progress }}%"
+            ></em>
+
+        </div>
+
+
+        <div class="goal-foot">
+
+            <span>
+                {{ goal.progress }}% complete
+            </span>
+
+            <span>
+                {{ goal.deadline or 'No deadline' }}
+            </span>
+
+        </div>
+
+
+        <form
+            class="inline-progress"
+            method="post"
+            action="{{ url_for(
+                'update_goal_progress',
+                goal_id=goal.id
+            ) }}"
+        >
+
+            <input
+                type="range"
+                name="progress"
+                min="0"
+                max="100"
+                value="{{ goal.progress }}"
+                oninput="
+                this.nextElementSibling.textContent =
+                this.value + '%'
+                "
+            >
+
+
+            <output>
+                {{ goal.progress }}%
+            </output>
+
+
+            <button class="ghost">
+                Update
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        Your future needs a first goal.
+    </div>
+
+    {% endfor %}
+
+</section>
+
+</div>
+
+{% endblock %}

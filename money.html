@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            MONEY
+        </span>
+
+        <h1>
+            Money Map
+        </h1>
+
+        <p>
+            Track spending without making
+            budgeting boring.
+        </p>
+
+    </div>
+
+
+    <div class="big-number">
+
+        ₹{{ "%.0f"|format(total) }}
+
+        <small>
+            tracked
+        </small>
+
+    </div>
+
+</div>
+
+
+<div class="two-col">
+
+
+    <section class="panel">
+
+        <h2>
+            Log spending
+        </h2>
+
+
+        <form
+            class="form"
+            method="post"
+        >
+
+            <label>
+
+                What did you spend on?
+
+                <input
+                    name="title"
+                    required
+                    placeholder="Lunch"
+                >
+
+            </label>
+
+
+            <div class="form-grid">
+
+                <label>
+
+                    Amount (₹)
+
+                    <input
+                        type="number"
+                        name="amount"
+                        min="0"
+                        step="0.01"
+                        required
+                        placeholder="120"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Category
+
+                    <select name="category">
+
+                        <option>
+                            Food
+                        </option>
+
+                        <option>
+                            Travel
+                        </option>
+
+                        <option>
+                            College
+                        </option>
+
+                        <option>
+                            Entertainment
+                        </option>
+
+                        <option>
+                            Shopping
+                        </option>
+
+                        <option>
+                            Other
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+
+            <label>
+
+                Date
+
+                <input
+                    type="date"
+                    name="spent_on"
+                    value="{{ request.form.get('spent_on', '') }}"
+                >
+
+            </label>
+
+
+            <button class="primary-btn full">
+
+                ＋ Add expense
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <section class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Where it goes
+                </h2>
+
+                <p>
+                    Spending categories
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% for category in categories %}
+
+        <div class="money-bar">
+
+            <div>
+
+                <strong>
+                    {{ category.category }}
+                </strong>
+
+                <span>
+                    ₹{{ "%.0f"|format(category.total) }}
+                </span>
+
+            </div>
+
+
+            <i>
+
+                <em
+                    style="
+                    width:
+                    {{
+                        (
+                            category.total / total * 100
+                            if total else 0
+                        )|round
+                    }}%
+                    "
+                ></em>
+
+            </i>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            No spending logged yet.
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</div>
+
+
+<section class="panel">
+
+    <div class="panel-head">
+
+        <div>
+
+            <h2>
+                Recent spending
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="expense-table">
+
+        {% for expense in expenses %}
+
+        <div>
+
+            <span class="expense-dot">
+                {{ expense.category[0] }}
+            </span>
+
+            <strong>
+                {{ expense.title }}
+            </strong>
+
+            <small>
+                {{ expense.category }}
+                ·
+                {{ expense.spent_on }}
+            </small>
+
+            <b>
+                ₹{{ "%.0f"|format(expense.amount) }}
+            </b>
+
+
+            <form
+                method="post"
+                action="{{ url_for(
+                    'delete_expense',
+                    expense_id=expense.id
+                ) }}"
+            >
+
+                <button class="ghost danger">
+                    ×
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            Your expense history will appear here.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

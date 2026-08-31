@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        LifePilot — Youth Life Manager
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                ✦
+            </div>
+
+            <div>
+                <b>LifePilot</b>
+                <small>
+                    your life, organized
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="side-label">
+            WORKSPACE
+        </div>
+
+
+        <nav>
+
+            <a
+                href="{{ url_for('home') }}"
+                class="{{ 'active' if request.endpoint == 'home' else '' }}"
+            >
+                ⌂
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('tasks') }}"
+                class="{{ 'active' if request.endpoint == 'tasks' else '' }}"
+            >
+                ✓
+                <span>Tasks</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('money') }}"
+                class="{{ 'active' if request.endpoint == 'money' else '' }}"
+            >
+                ₹
+                <span>Money</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('goals') }}"
+                class="{{ 'active' if request.endpoint == 'goals' else '' }}"
+            >
+                ◎
+                <span>Goals</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('habits') }}"
+                class="{{ 'active' if request.endpoint == 'habits' else '' }}"
+            >
+                🔥
+                <span>Habits</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('skills') }}"
+                class="{{ 'active' if request.endpoint == 'skills' else '' }}"
+            >
+                ◆
+                <span>Skill Roadmaps</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('notes') }}"
+                class="{{ 'active' if request.endpoint == 'notes' else '' }}"
+            >
+                ✎
+                <span>Quick Notes</span>
+            </a>
+
+        </nav>
+
+
+        <div class="side-tip">
+
+            <strong>
+                💡 Life tip
+            </strong>
+
+            <p>
+                Don't plan your whole life today.
+                Just make the next good move.
+            </p>
+
+        </div>
+
+
+        <form
+            method="post"
+            action="{{ url_for('reset_demo') }}"
+            onsubmit="return confirm('Reset demo data?')"
+        >
+
+            <button class="reset">
+                ↻ Reset demo data
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <div class="mobile-brand">
+                    ✦ LifePilot
+                </div>
+
+                <p class="eyebrow">
+                    PERSONAL LIFE COMMAND CENTER
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-btn"
+                    onclick="toggleTheme()"
+                >
+                    ◐
+                </button>
+
+                <div class="avatar">
+                    RM
+                </div>
+
+            </div>
+
+        </header>
+
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+
+</body>
+
+</html>

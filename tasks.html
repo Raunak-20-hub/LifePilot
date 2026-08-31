@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            FOCUS
+        </span>
+
+        <h1>
+            Tasks
+        </h1>
+
+        <p>
+            Turn mental clutter into a clear list.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="two-col">
+
+
+    <!-- ADD TASK -->
+
+    <section class="panel">
+
+        <h2>
+            Add a task
+        </h2>
+
+
+        <form
+            class="form"
+            method="post"
+        >
+
+            <label>
+
+                What needs to happen?
+
+                <input
+                    name="title"
+                    required
+                    placeholder="Finish Python assignment"
+                >
+
+            </label>
+
+
+            <div class="form-grid">
+
+                <label>
+
+                    Category
+
+                    <select name="category">
+
+                        <option>
+                            College
+                        </option>
+
+                        <option>
+                            Skills
+                        </option>
+
+                        <option>
+                            Personal
+                        </option>
+
+                        <option>
+                            Family
+                        </option>
+
+                        <option>
+                            Health
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+
+                    Priority
+
+                    <select name="priority">
+
+                        <option>
+                            High
+                        </option>
+
+                        <option selected>
+                            Medium
+                        </option>
+
+                        <option>
+                            Low
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <label>
+
+                    Date
+
+                    <input
+                        type="date"
+                        name="due_date"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Time
+
+                    <input
+                        type="time"
+                        name="due_time"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <button class="primary-btn full">
+
+                Add task
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- TASK LIST -->
+
+    <section class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Your tasks
+                </h2>
+
+                <p>
+                    {{ tasks|length }} items
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="task-list">
+
+            {% for task in tasks %}
+
+            <div
+                class="task-row {{ 'done' if task.completed else '' }}"
+            >
+
+                <form
+                    method="post"
+                    action="{{ url_for('toggle_task', task_id=task.id) }}"
+                >
+
+                    <button class="check">
+
+                        {% if task.completed %}
+                            ✓
+                        {% endif %}
+
+                    </button>
+
+                </form>
+
+
+                <div class="task-info">
+
+                    <strong>
+                        {{ task.title }}
+                    </strong>
+
+                    <span>
+
+                        {{ task.category }}
+
+                        ·
+
+                        {{ task.due_date or 'No date' }}
+
+                        {% if task.due_time %}
+                            · {{ task.due_time }}
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="priority {{ task.priority|lower }}"
+                >
+                    {{ task.priority }}
+                </span>
+
+
+                <form
+                    method="post"
+                    action="{{ url_for('delete_task', task_id=task.id) }}"
+                >
+
+                    <button class="ghost danger">
+                        ×
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+                No tasks yet.
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

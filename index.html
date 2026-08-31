@@ -1,0 +1,457 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <span class="pill">
+            ✦ PERSONAL COMMAND CENTER
+        </span>
+
+        <h1>
+            Take control of your
+            <span>everyday.</span>
+        </h1>
+
+        <p>
+            One simple place for your tasks,
+            money, goals, habits and future.
+        </p>
+
+    </div>
+
+
+    <a
+        class="primary-btn"
+        href="{{ url_for('tasks') }}"
+    >
+        ＋ Add a task
+    </a>
+
+</section>
+
+
+<!-- STATISTICS -->
+
+<div class="stat-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ✓
+        </div>
+
+        <span>
+            Tasks completed
+        </span>
+
+        <strong>
+            {{ stats.done }} / {{ stats.total }}
+        </strong>
+
+        <small>
+            {{ stats.completion }}% completion
+        </small>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ◷
+        </div>
+
+        <span>
+            Due today
+        </span>
+
+        <strong>
+            {{ stats.today_tasks }}
+        </strong>
+
+        <small>
+            Keep your day realistic
+        </small>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ₹
+        </div>
+
+        <span>
+            Tracked spending
+        </span>
+
+        <strong>
+            ₹{{ "%.0f"|format(stats.spent) }}
+        </strong>
+
+        <small>
+            Know where your money goes
+        </small>
+
+    </div>
+
+
+    <div class="stat-card score">
+
+        <div class="stat-icon">
+            ✦
+        </div>
+
+        <span>
+            LifePilot score
+        </span>
+
+        <strong>
+            {{ stats.life_score }}
+            <small>/100</small>
+        </strong>
+
+        <small>
+            Consistency, not perfection
+        </small>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="dashboard-grid">
+
+
+    <!-- TASKS -->
+
+    <section class="panel wide">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Today's focus
+                </h2>
+
+                <p>
+                    Your next few moves
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('tasks') }}">
+                View all →
+            </a>
+
+        </div>
+
+
+        <div class="task-list">
+
+            {% for task in tasks %}
+
+            <div
+                class="task-row {{ 'done' if task.completed else '' }}"
+            >
+
+                <form
+                    method="post"
+                    action="{{ url_for('toggle_task', task_id=task.id) }}"
+                >
+
+                    <button class="check">
+
+                        {% if task.completed %}
+                            ✓
+                        {% endif %}
+
+                    </button>
+
+                </form>
+
+
+                <div class="task-info">
+
+                    <strong>
+                        {{ task.title }}
+                    </strong>
+
+                    <span>
+                        {{ task.category }}
+                        ·
+                        {{ task.due_time or 'No time' }}
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="priority {{ task.priority|lower }}"
+                >
+                    {{ task.priority }}
+                </span>
+
+            </div>
+
+            {% else %}
+
+            <div class="empty">
+                No tasks yet.
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- LIFE SCORE -->
+
+    <section class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Life score
+                </h2>
+
+                <p>
+                    Your progress snapshot
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="score-ring"
+            style="--score: {{ stats.life_score }}%"
+        >
+
+            <div>
+
+                <b>
+                    {{ stats.life_score }}
+                </b>
+
+                <small>
+                    /100
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="mini-bars">
+
+            <div>
+
+                <span>
+                    Tasks
+                </span>
+
+                <i>
+                    <em
+                        style="width:{{ stats.completion }}%"
+                    ></em>
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Goals
+                </span>
+
+                <i>
+                    <em
+                        style="width:{{ [stats.goals * 20, 100]|min }}%"
+                    ></em>
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Habits
+                </span>
+
+                <i>
+                    <em
+                        style="width:{{ [stats.habits * 20, 100]|min }}%"
+                    ></em>
+                </i>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GOALS -->
+
+    <section class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Goals in motion
+                </h2>
+
+                <p>
+                    Keep your bigger picture visible
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('goals') }}">
+                Manage →
+            </a>
+
+        </div>
+
+
+        {% for goal in goals %}
+
+        <div class="goal-mini">
+
+            <div>
+
+                <strong>
+                    {{ goal.title }}
+                </strong>
+
+                <span>
+                    {{ goal.progress }}%
+                </span>
+
+            </div>
+
+
+            <i>
+
+                <em
+                    style="width:{{ goal.progress }}%"
+                ></em>
+
+            </i>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            Create your first goal.
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- HABITS -->
+
+    <section class="panel wide">
+
+        <div class="panel-head">
+
+            <div>
+
+                <h2>
+                    Habit streaks
+                </h2>
+
+                <p>
+                    Small actions compound
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('habits') }}">
+                Open habits →
+            </a>
+
+        </div>
+
+
+        <div class="habit-strip">
+
+            {% for habit in habits %}
+
+            <div class="habit-mini">
+
+                <span>
+                    {{ habit.emoji }}
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ habit.title }}
+                    </strong>
+
+                    <small>
+                        🔥 {{ habit.streak }}
+                        day streak
+                    </small>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <section class="panel quote">
+
+        <div class="quote-mark">
+            “
+        </div>
+
+        <div>
+
+            <h2>
+                Don't confuse being busy
+                with moving forward.
+            </h2>
+
+            <p>
+                LifePilot helps you see what
+                actually matters today —
+                study, money, skills, habits,
+                goals and the small steps between them.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

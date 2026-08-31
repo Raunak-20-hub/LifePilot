@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            CONSISTENCY
+        </span>
+
+        <h1>
+            Habit Garden
+        </h1>
+
+        <p>
+            Don't chase perfection.
+            Build repeatable days.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="two-col">
+
+
+<section class="panel">
+
+    <h2>
+        Plant a habit 🌱
+    </h2>
+
+
+    <form
+        class="form"
+        method="post"
+    >
+
+        <label>
+
+            Habit name
+
+            <input
+                name="title"
+                required
+                placeholder="Study for 45 minutes"
+            >
+
+        </label>
+
+
+        <label>
+
+            Emoji
+
+            <input
+                name="emoji"
+                value="🔥"
+                maxlength="3"
+            >
+
+        </label>
+
+
+        <button class="primary-btn full">
+
+            Add habit
+
+        </button>
+
+    </form>
+
+
+    <div class="soft-note">
+
+        💡 Choose habits you can realistically
+        repeat. Tiny wins count.
+
+    </div>
+
+</section>
+
+
+
+<section class="panel">
+
+    <div class="panel-head">
+
+        <div>
+
+            <h2>
+                Today's garden
+            </h2>
+
+            <p>
+                Tap done when you've completed one.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% for habit in habits %}
+
+    <div class="habit-row">
+
+        <div class="habit-emoji">
+            {{ habit.emoji }}
+        </div>
+
+
+        <div class="task-info">
+
+            <strong>
+                {{ habit.title }}
+            </strong>
+
+            <span>
+                🔥 {{ habit.streak }}
+                day streak
+            </span>
+
+        </div>
+
+
+        <form
+            method="post"
+            action="{{ url_for(
+                'check_habit',
+                habit_id=habit.id
+            ) }}"
+        >
+
+            <button
+                class="
+                habit-check
+                {{ 'checked' if habit.checked_today else '' }}
+                "
+            >
+
+                {% if habit.checked_today %}
+                    ✓ Done
+                {% else %}
+                    Mark done
+                {% endif %}
+
+            </button>
+
+        </form>
+
+
+        <form
+            method="post"
+            action="{{ url_for(
+                'delete_habit',
+                habit_id=habit.id
+            ) }}"
+        >
+
+            <button class="ghost danger">
+                ×
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        Plant your first habit.
+    </div>
+
+    {% endfor %}
+
+</section>
+
+</div>
+
+{% endblock %}

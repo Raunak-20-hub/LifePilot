@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-title">
+
+    <div>
+
+        <span class="pill">
+            FUTURE YOU
+        </span>
+
+        <h1>
+            Skill Roadmaps
+        </h1>
+
+        <p>
+            Stop asking “What should I learn?”
+            Start with a path.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="roadmap-grid">
+
+
+{% for name, icon, steps in roadmaps %}
+
+<article class="roadmap panel">
+
+
+    <div class="roadmap-title">
+
+        <span>
+            {{ icon }}
+        </span>
+
+        <div>
+
+            <h2>
+                {{ name }}
+            </h2>
+
+            <p>
+                {{ steps|length }}
+                steps from beginner
+                to portfolio
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="steps">
+
+        {% for step in steps %}
+
+        <div class="step">
+
+            <b>
+                {{ loop.index }}
+            </b>
+
+            <span>
+                {{ step }}
+            </span>
+
+            {% if not loop.last %}
+
+            <i>
+                ↓
+            </i>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <button
+        class="ghost full"
+        onclick="
+        alert(
+        'Great choice! Start with step 1 today.'
+        )
+        "
+    >
+
+        Start this roadmap →
+
+    </button>
+
+
+</article>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
